@@ -1,1 +1,1 @@
-wep: java -Dserver.port=$PORT -Dspring.profiles.active=prod $JAVA_OPTS -jar target/supercopo-api*.jar
+wep: java -Dserver.port=$PORT -Dspring.profiles.active=prod $JAVA_OPTS -jar target/supercopo-api-1.0.0-SNAPSHOT.jar
