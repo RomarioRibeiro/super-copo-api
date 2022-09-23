@@ -24,7 +24,7 @@ public class ProducaoService {
 	public Producao salvar(Producao producao) {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(producao.getPessoa().getCodigo());
 		
-		if(pessoa.isEmpty() || pessoa.get().isInativo()) {
+		if(pessoa != null || pessoa.get().isInativo()) {
 			throw new PessoaInexistenteOuInativa();
 		}
 		
