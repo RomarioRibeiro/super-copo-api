@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -82,7 +83,18 @@ public class ProducaoResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(producaoSalva);
 		
 	}
+		
 	
+	@PutMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')")
+	public ResponseEntity<Producao> atualizar(@PathVariable Long codigo, @Valid @RequestBody Producao producao) {
+		try {
+			Producao producaoSalvo = producaoService.atualizar(codigo, producao);
+			return ResponseEntity.ok(producaoSalvo);
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
 	
 	@DeleteMapping("/{codigo}")
 	@PreAuthorize("hasAuthority('ROLE_REMOVER_PRODUCAO') and hasAuthority('SCOPE_read')" )

@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
 @Table(name = "producao")
 public class Producao {
@@ -26,11 +24,9 @@ public class Producao {
 	private String descricao;
 	
 	@Column(name = "data_producao")
-	@JsonFormat(pattern =  "dd/MM/yyyy")
 	private LocalDate dataProducao;
 	
 	@Column(name = "data_finalizacao")
-	@JsonFormat(pattern =  "dd/MM/yyyy")
 	private LocalDate dataFinalizacao;
 	private BigDecimal quantidade;
 	private String observacao;

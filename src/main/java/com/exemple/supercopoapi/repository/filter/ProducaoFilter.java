@@ -2,16 +2,16 @@ package com.exemple.supercopoapi.repository.filter;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class ProducaoFilter {
 
 	private String descricao;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataProducaoDe;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataProducaoAte;
 
 	public String getDescricao() {

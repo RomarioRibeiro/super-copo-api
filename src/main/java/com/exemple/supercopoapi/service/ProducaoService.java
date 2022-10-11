@@ -2,7 +2,9 @@ package com.exemple.supercopoapi.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.exemple.supercopoapi.model.Pessoa;
@@ -29,5 +31,19 @@ public class ProducaoService {
 		}
 		
 		return producaoRepository.save(producao);
+	}
+	
+	private Producao buscarProducaoPeloCodigo(Long codigo) {
+		Producao producaoSalvar = producaoRepository.findById(codigo).orElseThrow(() -> new EmptyResultDataAccessException(1));
+		return producaoSalvar;
+	}
+
+
+	public Producao atualizar(Long codigo, Producao producao) {
+		Producao producaoSalvar = buscarProducaoPeloCodigo(codigo);
+
+		BeanUtils.copyProperties(producao, producaoSalvar, "codigo");
+		return producaoRepository.save(producaoSalvar);
+		
 	}
 }
